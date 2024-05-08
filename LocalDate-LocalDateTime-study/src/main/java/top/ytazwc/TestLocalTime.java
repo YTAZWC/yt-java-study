@@ -27,9 +27,6 @@ public class TestLocalTime {
         // 获取秒
         int second = localTime1.getSecond();
         System.out.println(second);
-        // 获取纳秒
-        int nano = localTime1.getNano();
-        System.out.println(nano);
 
     }
 

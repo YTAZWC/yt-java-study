@@ -8,6 +8,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/LocalDate-LocalDateTime-study/pom.xml" />
+        <option value="$PROJECT_DIR$/mp-study-demo/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

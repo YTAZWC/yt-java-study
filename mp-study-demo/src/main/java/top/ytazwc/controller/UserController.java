@@ -22,9 +22,14 @@ public class UserController {
 
     @PostMapping("/date")
     @MyAnnotation
-    public DateDTO method(@RequestBody DateDTO dto) {
+    public String method(@RequestBody DateDTO dto) {
         log.error("dto:{}", dto);
-        return dto;
+        return "success!";
+    }
+
+    @PostMapping("/good")
+    public String method2(@RequestBody DateDTO dto) {
+        return "success!";
     }
 
 }

@@ -6,15 +6,12 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import top.ytazwc.annotation.MyAnnotation;
+import top.ytazwc.wrapper.JsonParameterRequestWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.util.stream.Collectors;
 
 
 /**
@@ -55,20 +52,28 @@ public class MyInterceptor implements HandlerInterceptor {
         JSON_STRING.remove();
     }
 
-    private boolean checkPermission(MyAnnotation annotation, HttpServletRequest request, HttpServletResponse response) {
+    private boolean checkPermission(MyAnnotation annotation, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        try (
-                InputStream inputStream = request.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
-                ) {
-            String json = reader.lines().collect(Collectors.joining());
-            log.warn("json: {}", json);
-            JSON_STRING.set(json);
-        } catch (IOException e) {
-            System.out.println("异常?????");
-            log.error(e.getMessage());
-        }
+//        try (
+//                InputStream inputStream = request.getInputStream();
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+//                ) {
+//            String json = reader.lines().collect(Collectors.joining());
+//            log.warn("json: {}", json);
+//            JSON_STRING.set(json);
+//        } catch (IOException e) {
+//            System.out.println("异常?????");
+//            log.error(e.getMessage());
+//        }
 
+        JsonParameterRequestWrapper requestWrapper = new JsonParameterRequestWrapper(request);
+        String bodyMessage = requestWrapper.getBodyMessage();
+        // 输出JSON
+        log.warn("JSON: {}",bodyMessage);
+
+        requestWrapper.setBody(bodyMessage.getBytes());
+
+        // request = requestWrapper;
         return true;
     }
 

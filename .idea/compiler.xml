@@ -10,6 +10,7 @@
         <module name="mp-study-demo" />
         <module name="generics" />
         <module name="LocalDate-LocalDateTime-study" />
+        <module name="reflection-study" />
       </profile>
     </annotationProcessing>
   </component>

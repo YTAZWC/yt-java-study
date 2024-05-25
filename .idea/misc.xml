@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/LocalDate-LocalDateTime-study/pom.xml" />
         <option value="$PROJECT_DIR$/mp-study-demo/pom.xml" />
         <option value="$PROJECT_DIR$/generics/pom.xml" />
+        <option value="$PROJECT_DIR$/reflection-study/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

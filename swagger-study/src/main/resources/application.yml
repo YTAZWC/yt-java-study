@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: swagger-study
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yt_study?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+server:
+  port: 9091
+
+
+mybatis-plus:
+  configuration:
+    #\u5F00\u542F\u9A7C\u5CF0\u547D\u540D\u81EA\u52A8\u6620\u5C04
+    map-underscore-to-camel-case: true
+    #\u5F00\u542F\u65E5\u5FD7\u6253\u5370
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: top.ytazwc.entity
+  #\u626B\u63CFmapper\u6587\u4EF6
+  mapper-locations: classpath:mapper/*.xml

@@ -11,6 +11,7 @@
         <module name="swagger-study" />
         <module name="generics" />
         <module name="LocalDate-LocalDateTime-study" />
+        <module name="annotation-study" />
         <module name="reflection-study" />
       </profile>
     </annotationProcessing>

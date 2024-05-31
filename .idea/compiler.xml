@@ -8,11 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mp-study-demo" />
-        <module name="swagger-study" />
+        <module name="spi-app-test" />
+        <module name="spi-service-one" />
         <module name="generics" />
-        <module name="LocalDate-LocalDateTime-study" />
         <module name="annotation-study" />
         <module name="reflection-study" />
+        <module name="spi-interface" />
+        <module name="swagger-study" />
+        <module name="spi-service-two" />
+        <module name="LocalDate-LocalDateTime-study" />
       </profile>
     </annotationProcessing>
   </component>

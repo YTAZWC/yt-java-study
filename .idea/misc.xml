@@ -16,6 +16,10 @@
         <option value="$PROJECT_DIR$/reflection-study/pom.xml" />
         <option value="$PROJECT_DIR$/swagger-study/pom.xml" />
         <option value="$PROJECT_DIR$/annotation-study/pom.xml" />
+        <option value="$PROJECT_DIR$/spi-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/spi-service-one/pom.xml" />
+        <option value="$PROJECT_DIR$/spi-service-two/pom.xml" />
+        <option value="$PROJECT_DIR$/spi-app-test/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

@@ -20,6 +20,7 @@
         <option value="$PROJECT_DIR$/spi-service-one/pom.xml" />
         <option value="$PROJECT_DIR$/spi-service-two/pom.xml" />
         <option value="$PROJECT_DIR$/spi-app-test/pom.xml" />
+        <option value="$PROJECT_DIR$/serializable-study/pom.xml" />
       </list>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

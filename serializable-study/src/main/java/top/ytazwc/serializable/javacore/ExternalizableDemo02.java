@@ -10,7 +10,7 @@ import java.nio.file.Files;
  * @package top.ytazwc.serializable.javacore
  * @description 测试 Externalizable 接口
  */
-public class ExternalizableDemo01 {
+public class ExternalizableDemo02 {
 
     enum Sex {
         MALE,
@@ -54,12 +54,14 @@ public class ExternalizableDemo01 {
 
         @Override
         public void writeExternal(ObjectOutput out) throws IOException {
-
+            out.writeObject(name);
+            out.writeInt(age);
         }
 
         @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-
+            name = String.valueOf(in.readObject());
+            age = in.readInt();
         }
     }
 
@@ -101,7 +103,7 @@ public class ExternalizableDemo01 {
     }
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        final String fileName = "E:/workspace/Java/yt-java-study/serializable-study/Data/text3.dat";
+        final String fileName = "E:/workspace/Java/yt-java-study/serializable-study/Data/text.dat";
         serialize(fileName);
         deSerialize(fileName);
     }

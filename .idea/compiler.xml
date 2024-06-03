@@ -13,6 +13,7 @@
         <module name="spi-service-one" />
         <module name="generics" />
         <module name="annotation-study" />
+        <module name="io-study" />
         <module name="reflection-study" />
         <module name="spi-interface" />
         <module name="swagger-study" />

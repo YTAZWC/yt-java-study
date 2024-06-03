@@ -75,7 +75,8 @@ public class NIO {
                         e.printStackTrace(System.out);
                     }
                 } else if (event.isWritable()) {
-                    SocketChannel sc = (SocketChannel) event.channel();
+                    try (SocketChannel sc = (SocketChannel) event.channel()) {
+                    }
                 }
                 // 从迭代器中溢出当前事件 表示已处理
                 events.remove();

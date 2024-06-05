@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author 花木凋零成兰
@@ -18,6 +20,9 @@ import java.net.Socket;
  */
 public class DemoServer extends Thread {
     private ServerSocket serverSocket;
+    // 线程池
+    private ExecutorService executor;
+
     // 获取本地端口
     public int getPort() {
         return serverSocket.getLocalPort();
@@ -28,11 +33,14 @@ public class DemoServer extends Thread {
         try {
             // 端口设置为0 表示自动绑定一个空闲端口
             serverSocket = new ServerSocket(0);
+            // 引入线程池机制 来避免线程浪费
+            executor = Executors.newFixedThreadPool(8);
             while (true) {
                 // 阻塞等待客户端连接
                 Socket socket = serverSocket.accept();
                 RequestHandler requestHandler = new RequestHandler(socket);
-                requestHandler.start();
+//                requestHandler.start();
+                executor.execute(requestHandler);
             }
         } catch (IOException e) {
             e.printStackTrace();

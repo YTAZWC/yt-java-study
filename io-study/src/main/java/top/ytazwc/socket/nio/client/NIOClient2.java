@@ -65,7 +65,6 @@ public class NIOClient2 {
             // 注册选择器以及事件
             socketChannel.register(selector, SelectionKey.OP_WRITE | SelectionKey.OP_READ);
             while (selector.select() > 0) {
-
                 // 获取迭代器
                 Set<SelectionKey> selectionKeys = selector.selectedKeys();
                 Iterator<SelectionKey> iterator = selectionKeys.iterator();
@@ -75,7 +74,8 @@ public class NIOClient2 {
                         key = iterator.next();
                         if (key.isWritable()) {
                             sendMsg(key);
-                        } else if (key.isReadable()) {
+                        }
+                        if (key.isReadable()) {
                             receiveMsg(key);
                         }
                         iterator.remove();
@@ -93,8 +93,6 @@ public class NIOClient2 {
                         e.printStackTrace(System.err);
                     }
                 }
-
-
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -124,7 +122,8 @@ public class NIOClient2 {
     // 发送sendBuf中的数据给服务端
     private void sendMsg(SelectionKey key) {
         // 发送sendMsg中的数据
-        try (SocketChannel channel = (SocketChannel) key.channel()) {
+        try {
+            SocketChannel channel = (SocketChannel) key.channel();
             synchronized (sendBuf) {
                 // 为取出数据做好准备
                 sendBuf.flip();
@@ -140,7 +139,8 @@ public class NIOClient2 {
 
     // 接收来自服务端的数据 放到recvBuf中，满一行则输出，然后删除已输出数据
     private void receiveMsg(SelectionKey key) {
-        try (SocketChannel channel = (SocketChannel) key.channel()) {
+        try {
+            SocketChannel channel = (SocketChannel) key.channel();
             channel.read(recvBuf);
             recvBuf.flip();
             // 解码
@@ -149,7 +149,7 @@ public class NIOClient2 {
                 return ;
             }
             String recvMsgLine = recvMsg.substring(0, recvMsg.indexOf("\n") + 1);
-            System.out.println("【服务器】说：" + recvMsgLine);
+            System.out.print("【服务器】说：" + recvMsgLine);
             if (recvMsgLine.contains("bye")) {
                 key.cancel();
                 socketChannel.close();

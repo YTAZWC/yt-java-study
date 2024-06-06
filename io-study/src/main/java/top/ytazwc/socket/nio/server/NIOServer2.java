@@ -64,9 +64,11 @@ public class NIOServer2 {
                         key = iterator.next();
                         if (key.isAcceptable()) {
                             doAccept(key);
-                        } else if (key.isWritable()) {
+                        }
+                        if (key.isWritable()) {
                             sendMsg(key);
-                        } else if (key.isReadable()) {
+                        }
+                        if (key.isReadable()) {
                             receiveMsg(key);
                         }
                         // 删除处理过的 SelectionKey
@@ -75,12 +77,12 @@ public class NIOServer2 {
                         try {
                             // 发生异常时 使 SelectionKey 失效
                             if (key != null) {
+                                key.cancel();
                                 // 关闭 SelectionKey 关联的 SocketChannel
                                 key.channel().close();
-                                key.cancel();
                             }
                         } catch (IOException ex) {
-                            throw new RuntimeException(ex);
+                            ex.printStackTrace(System.err);
                         }
                         e.printStackTrace(System.err);
                     }
@@ -92,7 +94,8 @@ public class NIOServer2 {
     }
 
     private void doAccept(SelectionKey key) {
-        try (ServerSocketChannel ssc = (ServerSocketChannel) key.channel()) {
+        try {
+            ServerSocketChannel ssc = (ServerSocketChannel) key.channel();
             SocketChannel socketChannel = ssc.accept();
             System.out.println("接收到来自客户端的连接,来自" + socketChannel.socket().getRemoteSocketAddress());
             // 设置为非阻塞模式
@@ -109,7 +112,8 @@ public class NIOServer2 {
     private void sendMsg(SelectionKey key) {
         // 将key的附件转化为 ByteBuffer 类型并赋值给变量buffer
         ByteBuffer buffer = (ByteBuffer) key.attachment();
-        try (SocketChannel socketChannel = (SocketChannel) key.channel()) {
+        try {
+            SocketChannel socketChannel = (SocketChannel) key.channel();
             // 为读取数据做准备
             buffer.flip();
             // 解码
@@ -120,7 +124,7 @@ public class NIOServer2 {
             }
             // 读取一行数据
             String recData = data.substring(0, data.indexOf("\n") + 1);
-            System.out.println("客户端[" + socketChannel.socket().getInetAddress() + ":" + socketChannel.socket().getPort() + "]说: " + recData);
+            System.out.print("客户端[" + socketChannel.socket().getInetAddress() + ":" + socketChannel.socket().getPort() + "]说: " + recData);
             ByteBuffer outputBuffer = encode(genResponse(recData));
             while (outputBuffer.hasRemaining()) {
                 // 响应消息写入 socketChannel
@@ -143,16 +147,19 @@ public class NIOServer2 {
 
     private void receiveMsg(SelectionKey key) {
         ByteBuffer buffer = (ByteBuffer) key.attachment();
-        try (SocketChannel socketChannel = (SocketChannel) key.channel()) {
+        try {
+            SocketChannel socketChannel = (SocketChannel) key.channel();
             // 创建一个 ByteBuffer 存放读取到的数据
             ByteBuffer readBuffer = ByteBuffer.allocate(64);
             socketChannel.read(readBuffer);
             readBuffer.flip();
+            // 设置Buffer限制为它的容量，Buffer的限制是指在读取或写入操作中Buffer允许访问的最大位置
+            // 通过将限制设置为容量，可以确保在读取或写入操作中不会出现越界情况
             buffer.limit(buffer.capacity());
             // 把 readBuffer 中的数据拷贝到 buffer 中；假设buffer的容量足够大，不会出现溢出的情况
             // 在非阻塞模式下，socketChannel.read(readBuffer)方法一次读入多少字节的数据是不确定的，无法保证一次读入的是一整行字符串数据
             // 因此需要将每次读取到的数据放到 buffer 中 ，当凑到一行数据时再返回给客户端
-            buffer.put(buffer);
+            buffer.put(readBuffer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

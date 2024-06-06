@@ -1,4 +1,4 @@
-package top.ytazwc.socket.server;
+package top.ytazwc.socket.io.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

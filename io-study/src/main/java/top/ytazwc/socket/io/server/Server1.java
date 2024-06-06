@@ -1,4 +1,4 @@
-package top.ytazwc.socket.server;
+package top.ytazwc.socket.io.server;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
  * 2024/6/5
  * 简单客户端/服务端一次性简单通信 服务端
  */
-public class Server2 {
+public class Server1 {
     public static void main(String[] args) {
 
         try (

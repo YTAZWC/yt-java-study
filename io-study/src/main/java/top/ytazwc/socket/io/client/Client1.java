@@ -1,4 +1,4 @@
-package top.ytazwc.socket.client;
+package top.ytazwc.socket.io.client;
 
 import java.io.InputStream;
 import java.io.OutputStream;

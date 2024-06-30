@@ -11,20 +11,22 @@
         <module name="serializable-study" />
         <module name="spi-app-test" />
         <module name="spi-service-one" />
-        <module name="generics" />
         <module name="annotation-study" />
         <module name="io-study" />
-        <module name="reflection-study" />
         <module name="spi-interface" />
+        <module name="LocalDate-LocalDateTime-study" />
+        <module name="poi-study" />
+        <module name="generics" />
+        <module name="reflection-study" />
         <module name="swagger-study" />
         <module name="spi-service-two" />
-        <module name="LocalDate-LocalDateTime-study" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="mp-study-demo" options="-parameters" />
+      <module name="poi-study" options="-parameters" />
       <module name="swagger-study" options="-parameters" />
     </option>
   </component>

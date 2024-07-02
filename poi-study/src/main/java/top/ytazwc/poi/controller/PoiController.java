@@ -106,7 +106,9 @@ public class PoiController {
         // 获取订货时间
         String timeStr = StringUtils.getStrAllTrim(datas.get(7)).substring(5);
         DateTime date = DateUtil.parse(timeStr);
-        LocalDateTime dateTime = LocalDateTime.of(date.year(), date.month(), date.dayOfMonth(),0, 0, 0);
+        // 解析后月份少1
+//        System.out.println("month: " + date.month());
+        LocalDateTime dateTime = LocalDateTime.of(date.year(), date.month()+1, date.dayOfMonth(),0, 0, 0);
 //        String dateStr = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd: HH:mm:ss"));
 //        System.out.println(dateStr);
         orderGoods.setTime(dateTime);

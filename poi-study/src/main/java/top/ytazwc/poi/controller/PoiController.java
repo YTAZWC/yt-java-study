@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,8 +33,37 @@ public class PoiController {
 
     @PostMapping("/import")
     public String excelImport(MultipartFile file) throws IOException {
+
+        if (file == null) {
+            System.out.println("文件不可为空");
+            return "文件不可为空";
+        }
+        // 添加判断
+        // 获取源文件名
+        String filename = file.getOriginalFilename();
+        if (filename == null) {
+            return "文件上传出错!";
+        }
+        // 获取后缀
+        String suffix = filename.substring(filename.lastIndexOf("."));
+        if (suffix.isEmpty()) {
+            return "文件格式错误";
+        }
+        // 判断是否重复上传
+
+
         List<OrderGoods> goodsList = new ArrayList<>();
-        ExcelReader reader = ExcelUtil.getReader(file.getInputStream(), 0);
+        ExcelReader reader = ExcelUtil.getReader(file.getInputStream());
+
+        List<Sheet> sheets = reader.getSheets();
+        System.out.println(sheets.size());
+        for (Sheet sheet : sheets) {
+            System.out.println(sheet.getSheetName());
+
+        }
+
+
+
         getGoodsList(reader, goodsList);
 
         reader = ExcelUtil.getReader(file.getInputStream(), 1);
@@ -68,7 +98,7 @@ public class PoiController {
                     if (name.isEmpty() && ObjectUtil.isEmpty(orderGoods.getEndRowIndex())) {
                         // 菜品为空，则说明当前为 详情表 数据行-结束行
                         orderGoods.setEndRowIndex(j-1);
-                        System.out.println(j);
+//                        System.out.println(j);
                     } else if (name.contains("订货人")) {
                         if (ObjectUtil.isEmpty(orderGoods.getEndRowIndex())) {
                             orderGoods.setEndRowIndex(j-2);

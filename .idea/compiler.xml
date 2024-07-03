@@ -14,6 +14,7 @@
         <module name="annotation-study" />
         <module name="io-study" />
         <module name="spi-interface" />
+        <module name="sorting-study" />
         <module name="LocalDate-LocalDateTime-study" />
         <module name="poi-study" />
         <module name="generics" />

@@ -28,6 +28,8 @@
     <file url="file://$PROJECT_DIR$/spi-service-two/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/spi-service-two/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/swagger-study/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/thread_study/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/thread_study/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

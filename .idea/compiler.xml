@@ -17,6 +17,7 @@
         <module name="sorting-study" />
         <module name="LocalDate-LocalDateTime-study" />
         <module name="poi-study" />
+        <module name="thread_study" />
         <module name="collection_study" />
         <module name="generics" />
         <module name="reflection-study" />

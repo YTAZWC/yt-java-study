@@ -19,7 +19,6 @@ public class VolatileExample {
             @Override
             public void run() {
                 while (!stop) {
-
                 }
                 System.out.println("3: " + Thread.currentThread().getName() + "停止了");
             }

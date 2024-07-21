@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mp-study-demo" />
+        <module name="jvm-study" />
         <module name="serializable-study" />
         <module name="spi-app-test" />
         <module name="spi-service-one" />

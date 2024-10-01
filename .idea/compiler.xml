@@ -14,6 +14,7 @@
         <module name="spi-service-one" />
         <module name="annotation-study" />
         <module name="io-study" />
+        <module name="Hello-algorithm" />
         <module name="spi-interface" />
         <module name="sorting-study" />
         <module name="LocalDate-LocalDateTime-study" />
